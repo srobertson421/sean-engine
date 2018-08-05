@@ -1,20 +1,19 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
-#include "GameObject.hpp"
 #include "Map.hpp"
-#include "ECS.hpp"
-#include "Components.hpp"
+#include "ECS/Components.hpp"
+#include "Vector2D.hpp"
 
 Game::Game() {}
 Game::~Game() {}
 
-GameObject* player;
 Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
-Manager manager;
-auto& newPlayer(manager.addEntity());
+auto& player(manager.addEntity());
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 
@@ -43,13 +42,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     isRunning = false;
   }
 
-  player = new GameObject("assets/player.png", 0, 0);
   map = new Map();
-  newPlayer.addComponent<PositionComponent>();
+  player.addComponent<TransformComponent>();
+  player.addComponent<SpriteComponent>("assets/player.png");
+  player.addComponent<KeyboardController>();
 }
 
 void Game::handleEvents() {
-  SDL_Event event;
+  
   SDL_PollEvent(&event);
   switch(event.type) {
     case SDL_QUIT:
@@ -61,22 +61,20 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-  player->Update();
-  manager.update();
-  //std::cout << newPlayer.getComponent<PositionComponent>().x() << " : " << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+	manager.refresh();
+	manager.update();
 }
 
 void Game::render() {
-  SDL_RenderClear(renderer);
-  map->DrawMap();
-  player->Render();
-  manager.draw();
-  SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
+	map->DrawMap();
+	manager.draw();
+	SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
-  SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
-  SDL_Quit();
-  std::cout << "Game Cleaned" << std::endl;
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
+	std::cout << "Game Cleaned" << std::endl;
 }
