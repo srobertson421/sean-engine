@@ -47,6 +47,7 @@ public:
   void draw() {}
 
   bool isActive() const { return active; }
+
   void destroy() { active = false; }
 
   template <typename T> bool hasComponent() const {

@@ -43,7 +43,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     isRunning = false;
   }
 
-  player = new GameObject("../assets/player.png", 0, 0);
+  player = new GameObject("assets/player.png", 0, 0);
   map = new Map();
   newPlayer.addComponent<PositionComponent>();
 }
@@ -63,13 +63,14 @@ void Game::handleEvents() {
 void Game::update() {
   player->Update();
   manager.update();
-  std::cout << newPlayer.getComponent<PositionComponent>().x() << " : " << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+  //std::cout << newPlayer.getComponent<PositionComponent>().x() << " : " << newPlayer.getComponent<PositionComponent>().y() << std::endl;
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
   map->DrawMap();
   player->Render();
+  manager.draw();
   SDL_RenderPresent(renderer);
 }
 
