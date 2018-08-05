@@ -1,9 +1,9 @@
-#include "../include/Game.hpp"
-#include "../include/TextureManager.hpp"
-#include "../include/GameObject.hpp"
-#include "../include/Map.hpp"
-#include "../include/ECS.hpp"
-#include "../include/Components.hpp"
+#include "Game.hpp"
+#include "TextureManager.hpp"
+#include "GameObject.hpp"
+#include "Map.hpp"
+#include "ECS.hpp"
+#include "Components.hpp"
 
 Game::Game() {}
 Game::~Game() {}

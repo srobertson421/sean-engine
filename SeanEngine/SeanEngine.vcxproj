@@ -127,19 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\Components.hpp" />
-    <ClInclude Include="include\ECS.hpp" />
-    <ClInclude Include="include\Game.hpp" />
-    <ClInclude Include="include\GameObject.hpp" />
-    <ClInclude Include="include\Map.hpp" />
-    <ClInclude Include="include\TextureManager.hpp" />
+    <ClInclude Include="Components.hpp" />
+    <ClInclude Include="ECS.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="Map.hpp" />
+    <ClInclude Include="TextureManager.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameObject.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL2.dll">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </None>
+    <None Include="SDL2_image.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
